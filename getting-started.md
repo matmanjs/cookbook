@@ -6,6 +6,18 @@
 
 `matman init` 语法：
 
+```
+$ matman init
+
+  Usage: mockstar init <command> [options]
+  Commands:
+      project    Initialize project.
+      tester     Initialize tester.
+  Options:
+      --dev                  Debug for development.
+  Report bugs to https://github.com/mockstarjs/mockstar/issues.
+```
+
 ## 2. 初始化项目
 
 运行如下命令初始化一个项目：
@@ -50,14 +62,14 @@ $ npm build #修改过爬虫文件后，如果只是修改测试用例则无需�
 $ npm run test
 ```
 
-## 6. 新增 mocker 桩对象
+## 6. 新增 tester 测试对象
 
-在 `testers` 目录下，执行如下命令来快速新建一个 mocker: 
+在 `testers` 目录下，执行如下命令来快速新建一个 tester: 
 
 ```bash
-$ matman init mocker
+$ matman init tester
 ```
 
-> 我们推荐为 mocker 设置一个容易识别的名字，一般建议与 CGI 相关，例如取 CGI 的名字为 mocker 名字，这样容易查找。
+> 我们推荐为 tester 设置一个容易识别的名字，一般建议与页面相关，例如取页面的名字为 tester 名字，这样容易查找。
 
-新建完成之后，我们唯一必须要修改的是目录下的 `config.js` 文件，设置其中的 `route` 值（请求的 path 值，不要加域名和 query 等）。该值用于匹配我们的 CGI，可参考 [Express router](http://expressjs.com/en/4x/api.html#router) 的说明。
+新建完成之后，我们唯一必须要修改的是目录下的 `env/index.js` 文件，设置其中的 `getPageUrl` 函数中页面链接参数的值，该值用于匹配测试用的页面，还有 `WAIT` 值，该值用于控制爬虫开始执行的时间点。
