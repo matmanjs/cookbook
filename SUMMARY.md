@@ -6,7 +6,5 @@
 
 ## 技术细节
 
-* [基本概念](details-of-matman/basic-concepts.md)
-* [整体架构](details-of-matman/constructor.md)
 * [爬虫api](details-of-matman/someapi.md)
 
