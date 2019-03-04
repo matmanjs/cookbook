@@ -8,3 +8,6 @@
 
 * [爬虫api](details-of-matman/someapi.md)
 
+## 配置
+
+* [matman.config.js 配置](config/matman-config.md)
