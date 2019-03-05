@@ -12,7 +12,7 @@ $ sudo npm install matman-cli -g
 
 另外，还可能会遇到另外一种情况，就是由于 electron 带来的权限问题，详见 https://github.com/matmanjs/matman-cli/issues/30。
 
-![electron-permission](../images/faq/electron-permission.png)
+![](../images/faq/electron-permission.png)
 
 请使用如下命令安装：
 
