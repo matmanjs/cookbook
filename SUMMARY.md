@@ -9,6 +9,9 @@
 
 ## 主要概念
 
+* [页面快照](main-concepts/page-snapshot.md)
+* [数据快照](main-concepts/data-snapshot.md)
+
 ## 进阶
 
 ## API 
