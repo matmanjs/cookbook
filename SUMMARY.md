@@ -11,6 +11,7 @@
 
 * [页面快照](main-concepts/page-snapshot.md)
 * [数据快照](main-concepts/data-snapshot.md)
+* [基于白盒数据测试数据快照](main-concepts/test-by-mock.md)
 
 ## 进阶
 
