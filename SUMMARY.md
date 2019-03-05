@@ -13,8 +13,8 @@
 
 ## API 
 
-* [matman.config.js 配置](config/matman-config.md)
-* [爬虫api](details-of-matman/someapi.md)
+* [matman.config.js 配置](api/matman-config.md)
+* [前端爬虫工具 web-crawl-util](api/web-crawl-util.md)
 
 ## 贡献
 
