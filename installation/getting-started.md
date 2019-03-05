@@ -38,7 +38,7 @@ $ npm isntall
 ```
 
 ## 4. 项目结构
-![`matman` 项目结构](./images/matmanproject.png)
+![`matman` 项目结构](../images/matmanproject.png)
 - `src` 文件夹
 
     `lib` 文件夹中存放一些爬虫或测试用到的公共方法及数据；

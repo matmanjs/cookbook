@@ -1,8 +1,11 @@
 # Table of contents
 
 * [关于 Matman](README.md)
-* [安装和升级](install.md)
-* [快速上手](getting-started.md)
+
+## 安装
+
+* [安装和升级](installation/install.md)
+* [快速上手](installation/getting-started.md)
 
 ## 技术细节
 
