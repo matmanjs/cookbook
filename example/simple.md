@@ -87,23 +87,6 @@ matman测试的思路可以这么简化理解：按照用例运行操作，记�
 
 对比上面的index.js，可以看到里面是指定相对路径为../../crawlers/get-page-info-jquery的文件作为爬虫脚本的，里面有示例的代码。
 
-爬虫脚本中需要将爬取元素的函数提供给外部调用，如下
-
-```js
-module.exports = () => {
-    return {
-        //顶部图片信息获取
-        topImageInfo: getTopImageInfo(),
-        //中央规则信息获取
-        middleRule: getMiddleRule(),
-        //按钮状态信息获取
-        buttonCondition: getButtonCondition(),
-        //单行文本信息获取
-        oneLineText: getOneLineText()
-    };
-};
-```
-
 ### 顶部图片
 
 首先定义一个获取顶部图片信息的方法
@@ -179,3 +162,444 @@ if (result.isExist) {
 ```
 
 最后将得到的结果返回，一个完整的爬取顶层图片的函数就书写完了。
+
+## 规则
+
+同理，先建立一个方法
+
+```js
+/**
+ * 规则说明
+ */
+function getMiddleRule() {
+
+}
+```
+
+打开chrome控制台来查看页面元素，可以看到中央规则的代码如下：
+
+```html
+<div id="rules" class="section">
+    <h2>规则说明：</h2>
+    <p>1.第一条规则；</p>
+    <p>2.第二条规则；</p>
+    <p>3.第三条规则，这条规则很长，会自动换行展示自动换行展示自动换行展示自动换行展示自动换行展示；</p>
+    <div class="btn-group">
+        <div class="btn active">同意</div>
+        <div class="btn disable">不同意</div>
+    </div>
+</div>
+```
+
+可以看到它的父元素的id为rules，因此可以用如下的方式去判断它是否存在
+
+```js
+//jQuery写法
+const parentSelector = '#rules';
+
+const result = {
+    isExist: $(parentSelector).length > 0
+};
+
+
+//useJquery写法
+const parentSelector = '#rules';
+
+const result = {
+    isExist: useJquery.isExist(parentSelector)
+};
+```
+
+同理，可以用如下的方式获取规则的内容
+
+```js
+//jQuery写法
+if (result.isExist) {
+    result.text = $.trim($(parentSelector).text());
+}
+
+
+//useJquery写法
+if (result.isExist) {
+    result.text = useJquery.getText(parentSelector);
+}
+
+```
+
+最后将结果返回，获取规则内容的脚本就完成了
+
+### 按钮
+
+同样需要建立一个方法
+
+```js
+/**
+ * 获取按钮状态
+ */
+function getButtonCondition() {
+
+}
+```
+
+检查父元素是否存在
+
+```js
+//jQuery写法
+const parentSelector = '.btn-group';
+
+const result = {
+    isExist: $(parentSelector).length > 0
+};
+
+
+//useJquery写法
+const parentSelector = '.btn-group';
+
+const result = {
+    isExist: useJquery.isExist(parentSelector)
+};
+```
+
+
+这里是需要爬取按钮的信息，示例中我们只需要获取按钮的值即可，
+
+示例如下
+
+```js
+//jQuery写法
+if (result.isExist) {
+    result.active_btn = $.trim($('.active', parentSelector).text());
+    result.disable_btn = $.trim($('.disable', parentSelector).text());
+}
+
+
+//useJquery写法
+if (result.isExist) {
+    result.active_btn = useJquery.getText('.active', parentSelector);
+    result.disable_btn = useJquery.getText('.disable', parentSelector);
+}
+```
+
+最后将结果返回，获取按钮值的脚本就完成了
+
+### 友情提示
+
+经过之前的示例，我们可以直接将这部分代码写出来
+
+```js
+//jQuery写法
+function getOneLineText() {
+    const parentSelector = '#tips';
+
+    const result = {
+        isExist: $(parentSelector).length > 0
+    };
+
+    if (result.isExist) {
+        let computedStyle = document.defaultView.getComputedStyle($('div.long-word', parentSelector)[0]);
+        result.isOneLine = parseInt(computedStyle.height) === parseInt(computedStyle.lineHeight);
+        result.text = $.trim($('div.long-word', parentSelector).text());
+    }
+
+    return result;
+}
+
+
+//useJquery写法
+function getOneLineText() {
+    const parentSelector = '#tips';
+
+    const result = {
+        isExist: useJquery.isExist(parentSelector)
+    };
+
+    if (result.isExist) {
+        result.isOneLine = useJquery.getStyle('div.long-word', parentSelector).isOneLine;
+        result.text = useJquery.getText('div.long-word', parentSelector);
+    }
+
+    return result;
+}
+```
+
+
+
+最后将爬取元素的函数提供给外部调用，如下
+
+```js
+module.exports = () => {
+    return {
+        //顶部图片信息获取
+        topImageInfo: getTopImageInfo(),
+        //中央规则信息获取
+        middleRule: getMiddleRule(),
+        //按钮状态信息获取
+        buttonCondition: getButtonCondition(),
+        //单行文本信息获取
+        oneLineText: getOneLineText()
+    };
+};
+```
+
+这样一个爬虫脚本文件就完成了，接来下就需要在测试文件中获取这些信息进行比对了
+
+## 测试文件
+
+测试文件在index.js同级目录下，常以index.test.js的文件名出现
+
+matman的测试框架基于mocha+chai，因此首选需要在头部引入chai这个模块。
+
+```js
+const expect = require('chai').expect;
+```
+
+用例的书写规则具体参见[mocha官网教程](https://mochajs.org/)
+
+首先可以书写一份空的用例
+
+```js
+
+describe('simple.html：常规检查-普通静态页面', function () {
+});
+
+```
+
+首先可以设置一个超时时间，即测试用例运行的最长时间，如果超过这个时间认为是用例执行失败
+
+```js
+this.timeout(30000);
+```
+
+测试过程的参数默认会按照在index.js中的设定，但是也可以基于每一条用例定制不同的参数，这个时候我们可以在头部引入index.js模块
+
+```js
+const checkPage = require('.');
+```
+
+在测试用例执行前修改index.js的参数。
+
+```js
+before(function () {
+    return checkPage({ show: false, doNotEnd: false, useRecorder: true })
+        .then(function (result) {
+            // console.log(JSON.stringify(result));
+            resultData = result;
+        });
+});
+```
+
+checkPage中传的参数释义
+
+- show： 运行时是否展示界面，false则不展示
+- doNotEnd：运行结束是否关闭进程
+- useRecorder：是否每一步操作都进行截图
+
+checkPage传的result中，包含爬虫脚本在页面上运行结束后获取到的信息，使用变量resultData将其存储起来。
+
+此时代码如下：
+
+```js
+const expect = require('chai').expect;
+
+const checkPage = require('.');
+
+describe.only('simple.html：常规检查-普通静态页面', function () {
+    this.timeout(30000);
+
+    let resultData;
+
+    before(function () {
+        return checkPage({ show: false, doNotEnd: false, useRecorder: true })
+            .then(function (result) {
+                // console.log(JSON.stringify(result));
+                resultData = result;
+            });
+    });
+});
+```
+
+这边使用descripe.only是为了只运行这一条用例
+接下来即可开始书写测试用例。对于我们要测试的页面，测试内容其实是检查它的基本信息，那么，就可以先写个架子。
+
+```js
+describe('检查基本信息', function () {
+
+});
+```
+
+在开始测试前，我们需要获取到存储在resultData中的爬虫脚本获取到的值，爬虫脚本的值存储在resultData中key为data对应的值中。
+
+```js
+let data;
+
+before(function () {
+        data = resultData.data;
+});
+
+```
+
+获取到这个值之后就可以开始书写测试用例了。首先我们写一下检查顶层图片的用例。
+
+顶层图片的爬虫方法名为topImageInfo，那么它在data中的key就为topImageInfo，而返回的结果中包含anchor1, anchor2, exist三个变量，因此我们可以按如下的方式书写测试用例。
+
+```js
+it('顶层图片检查通过', function () {
+    expect(data.topImageInfo).to.eql({
+        'anchor1': '//pic.url.cn/hy_personal/33ab1df8c733dfb724654cb8d9b8fe91647fc4ed4ade9ec4002d92f0e8867248/640',
+        'anchor2': 'http://pic.url.cn/hy_personal/e308b9c90742cc3c5c67334b6db49b19f891e8d507212fde3af431b8b8597b02/640',
+        'isExist': true
+    });
+});
+```
+同理可以书写其余三个的测试用例：
+
+```js
+it('规则文案检查通过', function () {
+    expect(data.middleRule).to.eql({
+        'isExist': true, 
+        'text': '规则说明：1.第一条规则；2.第二条规则；3.第三条规则，这条规则很长，会自动换行展示自动换行展示自动换行展示自动换行展示自动换行展示；同意不同意'
+    });
+});
+
+it('按钮样式检查通过', function () {
+    expect(data.buttonCondition).to.eql({
+        'isExist': true,
+        'active_btn': '同意',
+        'disable_btn': '不同意'
+    });
+});
+
+it('文字单行检查通过', function () {
+    expect(data.oneLineText).to.eql({
+        'isExist': true,
+        'isOneLine': false,
+        'text': '我简单说两句，我很长，但是不能够换行不能够换行不能够换行不能够换行不能够换行不能够换行不能够换行'
+    });
+});
+```
+
+当然，如果不想分的这么仔细的话，可以把四条用例合在一起
+
+```js
+it('数据快照检查', function () {
+    expect(data).to.eql({
+        "topImageInfo": {
+            "anchor1": "//pic.url.cn/hy_personal/33ab1df8c733dfb724654cb8d9b8fe91647fc4ed4ade9ec4002d92f0e8867248/640",
+            "anchor2": "http://pic.url.cn/hy_personal/e308b9c90742cc3c5c67334b6db49b19f891e8d507212fde3af431b8b8597b02/640",
+            "isExist": true
+        },
+        "middleRule": {
+            "isExist": true,
+            "text": "规则说明：1.第一条规则；2.第二条规则；3.第三条规则，这条规则很长，会自动换行展示自动换行展示自动换行展示自动换行展示自动换行展示；同意不同意"
+        },
+        "buttonCondition": {
+            "active_btn": "同意",
+            "disable_btn": "不同意",
+            "isExist": true
+        }
+        "oneLineText": {
+            "isExist": true,
+            "isOneLine": false,
+            "text": "我简单说两句，我很长，但是不能够换行不能够换行不能够换行不能够换行不能够换行不能够换行不能够换行"
+        }
+    });
+});
+```
+
+整个测试代码如下：
+```js
+const expect = require('chai').expect;
+
+const checkPage = require('.');
+
+describe('simple.html：常规检查-普通静态页面', function () {
+    this.timeout(30000);
+
+    let resultData;
+
+    before(function () {
+        return checkPage({ show: false, doNotEnd: false, useRecorder: true })
+            .then(function (result) {
+                // console.log(JSON.stringify(result));
+                resultData = result;
+            });
+    });
+
+    describe('检查基本信息', function () {
+        let data;
+
+        before(function () {
+            data = resultData.data;
+        });
+
+        it('顶层图片检查通过', function () {
+            expect(data.topImageInfo).to.eql({
+                'anchor1': '//pic.url.cn/hy_personal/33ab1df8c733dfb724654cb8d9b8fe91647fc4ed4ade9ec4002d92f0e8867248/640',
+                'anchor2': 'http://pic.url.cn/hy_personal/e308b9c90742cc3c5c67334b6db49b19f891e8d507212fde3af431b8b8597b02/640',
+                'isExist': true
+            });
+        });
+
+        it('规则文案检查通过', function () {
+            expect(data.middleRule).to.eql({
+                'isExist': true, 
+                'text': '规则说明：1.第一条规则；2.第二条规则；3.第三条规则，这条规则很长，会自动换行展示自动换行展示自动换行展示自动换行展示自动换行展示；同意不同意'
+            });
+        });
+
+        it('按钮样式检查通过', function () {
+            expect(data.buttonCondition).to.eql({
+                'isExist': true,
+                'active_btn': '同意',
+                'disable_btn': '不同意'
+            });
+        });
+
+        it('文字单行检查通过', function () {
+            expect(data.oneLineText).to.eql({
+                'isExist': true,
+                'isOneLine': false,
+                'text': '我简单说两句，我很长，但是不能够换行不能够换行不能够换行不能够换行不能够换行不能够换行不能够换行'
+            });
+        });
+    });
+});
+```
+
+这样子我们就完成了所有的测试代码
+
+## 执行
+
+控制台/终端切到matman-app目录下，运行如下命令：
+
+```bash
+npm run build
+```
+
+可以看到爬虫脚本都已编译完成
+
+再运行如下脚本
+
+```bash
+npm test
+```
+
+看到如下输出，说明测试全部通过
+
+```bash
+
+> matman-app@1.0.0 test /Users/remozhang/remozhang/git/matman-demo/DevOpts/matman-app
+> mocha src/testers/**/*.test.js
+
+
+
+  simple.html：常规检查-普通静态页面
+    检查基本信息
+      ✓ 顶层图片检查通过
+      ✓ 规则文案检查通过
+      ✓ 按钮样式检查通过
+      ✓ 文字单行检查通过
+
+
+  4 passing (8s)
+```
