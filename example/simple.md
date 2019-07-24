@@ -163,7 +163,7 @@ if (result.isExist) {
 
 最后将得到的结果返回，一个完整的爬取顶层图片的函数就书写完了。
 
-## 规则
+### 规则
 
 同理，先建立一个方法
 
@@ -588,7 +588,7 @@ npm test
 
 ```bash
 
-> matman-app@1.0.0 test /Users/remozhang/remozhang/git/matman-demo/DevOpts/matman-app
+> matman-app@1.0.0 test /Users/hebly723/git/matman-demo/DevOpts/matman-app
 > mocha src/testers/**/*.test.js
 
 
