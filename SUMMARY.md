@@ -17,6 +17,7 @@
 
 * [前言](example/preface.md)
 * [示例一](example/simple.md)
+* [示例二](example/transaction.md)
 
 ## 进阶
 
@@ -24,6 +25,7 @@
 
 * [matman.config.js 配置](api/matman-config.md)
 * [前端爬虫工具 web-crawl-util](api/web-crawl-util.md)
+* [交互函数](api/Interaction.md)
 
 ## 贡献
 

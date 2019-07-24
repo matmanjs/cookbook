@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>前言 · GitBook</title>
+        <title>交互函数 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="simple.html" />
+    <link rel="next" href="../faq/common.html" />
     
     
-    <link rel="prev" href="../main-concepts/test-by-mock.html" />
+    <link rel="prev" href="web-crawl-util.html" />
     
 
     </head>
@@ -188,9 +188,9 @@
         
         
     
-        <li class="chapter active" data-level="4.1" data-path="preface.html">
+        <li class="chapter " data-level="4.1" data-path="../example/preface.html">
             
-                <a href="preface.html">
+                <a href="../example/preface.html">
             
                     
                     前言
@@ -201,9 +201,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="simple.html">
+        <li class="chapter " data-level="4.2" data-path="../example/simple.html">
             
-                <a href="simple.html">
+                <a href="../example/simple.html">
             
                     
                     示例一
@@ -214,9 +214,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="transaction.html">
+        <li class="chapter " data-level="4.3" data-path="../example/transaction.html">
             
-                <a href="transaction.html">
+                <a href="../example/transaction.html">
             
                     
                     示例二
@@ -241,9 +241,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../api/matman-config.html">
+        <li class="chapter " data-level="6.1" data-path="matman-config.html">
             
-                <a href="../api/matman-config.html">
+                <a href="matman-config.html">
             
                     
                     matman.config.js 配置
@@ -254,9 +254,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../api/web-crawl-util.html">
+        <li class="chapter " data-level="6.2" data-path="web-crawl-util.html">
             
-                <a href="../api/web-crawl-util.html">
+                <a href="web-crawl-util.html">
             
                     
                     前端爬虫工具 web-crawl-util
@@ -267,9 +267,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../api/Interaction.html">
+        <li class="chapter active" data-level="6.3" data-path="Interaction.html">
             
-                <a href="../api/Interaction.html">
+                <a href="Interaction.html">
             
                     
                     交互函数
@@ -337,7 +337,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >前言</a>
+        <a href=".." >交互函数</a>
     </h1>
 </div>
 
@@ -352,11 +352,91 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x524D;&#x8A00;">&#x524D;&#x8A00;</h1>
-<p>&#x4E3A;&#x5E2E;&#x52A9;&#x8BFB;&#x8005;&#x5BF9;matman&#x6D4B;&#x8BD5;&#x6709;&#x66F4;&#x6DF1;&#x7684;&#x7406;&#x89E3;&#xFF0C;&#x4F5C;&#x8005;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x9879;&#x76EE;&#xFF0C;&#x91CC;&#x9762;&#x5305;&#x542B;&#x4E86;&#x5927;&#x90E8;&#x5206;&#x7AEF;&#x5230;&#x7AEF;&#x6D4B;&#x8BD5;&#x7684;&#x8C03;&#x7528;&#x573A;&#x666F;&#x3002;</p>
-<p>git&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/matmanjs/matman-demo" target="_blank">https://github.com/matmanjs/matman-demo</a></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x4ECB;&#x7ECD;&#x5230;&#x7684;&#x793A;&#x4F8B;&#x5728;&#x5176;&#x4E2D;&#x90FD;&#x4F1A;&#x6709;&#x6240;&#x4F53;&#x73B0;&#x3002;</p>
-<p>&#x4ECB;&#x7ECD;&#x4E4B;&#x524D;&#xFF0C;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x5C06;&#x9879;&#x76EE;&#x62C9;&#x53D6;&#x5230;&#x672C;&#x5730;&#x8FD0;&#x884C;&#xFF0C;&#x6709;&#x52A9;&#x4E8E;&#x5BF9;matman&#x6D4B;&#x8BD5;&#x6846;&#x67B6;&#x6574;&#x4F53;&#x903B;&#x8F91;&#x7684;&#x7406;&#x89E3;&#x3002;</p>
+                                <h1 id="&#x4EA4;&#x4E92;&#x51FD;&#x6570;">&#x4EA4;&#x4E92;&#x51FD;&#x6570;</h1>
+<p>matman&#x7684;&#x4EA4;&#x4E92;&#x51FD;&#x6570;&#x7EE7;&#x627F;&#x81EA;nightmare&#xFF0C;&#x9996;&#x5148;&#x5177;&#x5907;nightmare&#x539F;&#x6709;&#x7684;&#x4EA4;&#x4E92;&#x51FD;&#x6570;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x5176;&#x6B21;&#x81EA;&#x8EAB;&#x5C01;&#x88C5;&#x4E86;&#x4E00;&#x4E9B;&#x4EA4;&#x4E92;&#x51FD;&#x6570;</p>
+<p>nightmare&#x7684;&#x4EA4;&#x4E92;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="https://www.npmjs.com/package/nightmare#interact-with-the-page" target="_blank">Interact with the Page</a></p>
+<p>&#x5E38;&#x7528;&#x7684;&#x6709;:</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>&#x4F5C;&#x7528;</th>
+<th>&#x6765;&#x6E90;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.goto(url[, headers])</td>
+<td>&#x8F6C;&#x5230;&#x6307;&#x5B9A;&#x9875;&#x9762;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>.back()</td>
+<td>&#x56DE;&#x9000;&#x5230;&#x4E0A;&#x4E00;&#x4E2A;&#x9875;&#x9762;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>.forward()</td>
+<td>&#x524D;&#x8FDB;&#x5230;&#x4E0B;&#x4E00;&#x4E2A;&#x9875;&#x9762;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>.type(selector[, text])</td>
+<td>&#x8F93;&#x5165;&#x6587;&#x672C;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>.scrollTo(top, left)</td>
+<td>&#x6ED1;&#x52A8;&#x5230;&#x6307;&#x5B9A;&#x4F4D;&#x7F6E;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>.wait(ms)</td>
+<td>&#x7B49;&#x5F85;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x540E;&#x6267;&#x884C;&#x4E0B;&#x4E00;&#x6B65;&#x64CD;&#x4F5C;&#xFF08;&#x6BEB;&#x79D2;&#xFF09;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>.wait(selector)</td>
+<td>&#x7B49;&#x5F85;&#x6307;&#x5B9A;&#x9009;&#x62E9;&#x5668;&#x51FA;&#x73B0;&#x4E4B;&#x540E;&#x6267;&#x884C;&#x4E0B;&#x4E00;&#x6B65;&#x64CD;&#x4F5C;</td>
+<td>nightmare</td>
+</tr>
+<tr>
+<td>exDevice(name, opts)</td>
+<td>&#x8BBE;&#x5B9A;&#x8BBE;&#x5907;&#x6837;&#x5F0F;&#xFF0C;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exDevice.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+<tr>
+<td>exCookies(cookies, url)</td>
+<td>&#x4E3A;&#x6307;&#x5B9A;&#x7684;url&#x5730;&#x5740;&#x6CE8;&#x5165; cookie&#x3002;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exCookies.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+<tr>
+<td>exMergeCookies(cookies)</td>
+<td>&#x4E3A;&#x5F53;&#x524D;&#x7684;&#x9875;&#x9762;&#x53D8;&#x66F4; cookie &#xFF0C;&#x5982;&#x679C;&#x6709;&#x540C;&#x6837;&#x7684;key&#xFF0C;&#x5219;&#x4F1A;&#x8986;&#x76D6;&#x65E7;&#x503C;&#x3002;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exMergeCookies.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+<tr>
+<td>exScrollToTop()</td>
+<td>&#x5C06;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x5230;&#x9876;&#x90E8;&#x3002;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exScrollToTop.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+<tr>
+<td>exScrollToBottom()</td>
+<td>&#x5C06;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x5230;&#x5E95;&#x90E8;&#x3002;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exScrollToBottom.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+<tr>
+<td>exScrollToSelector(selector)</td>
+<td>&#x5C06;&#x9875;&#x9762;&#x6EDA;&#x52A8;&#x5230;&#x6307;&#x5B9A;&#x7684; selector &#x6240;&#x5728;&#x7684;&#x4F4D;&#x7F6E;&#x3002;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exScrollToSelector.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+<tr>
+<td>exChangeMockStar(cookieString)</td>
+<td>&#x5207;&#x6362; mockstar &#x7684;&#x6307;&#x5B9A;&#x6869;&#x6570;&#x636E; &#x3002;<a href="https://github.com/helinjiang/nightmare-handler/blob/master/docs/exChangeMockStar.md" target="_blank">&#x6587;&#x6863;</a></td>
+<td>matman</td>
+</tr>
+</tbody>
+</table>
 
                                 
                                 </section>
@@ -384,12 +464,12 @@
 
             
                 
-                <a href="../main-concepts/test-by-mock.html" class="navigation navigation-prev " aria-label="Previous page: 基于白盒数据测试数据快照">
+                <a href="web-crawl-util.html" class="navigation navigation-prev " aria-label="Previous page: 前端爬虫工具 web-crawl-util">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="simple.html" class="navigation navigation-next " aria-label="Next page: 示例一">
+                <a href="../faq/common.html" class="navigation navigation-next " aria-label="Next page: 常见问题">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -400,7 +480,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"前言","level":"4.1","depth":1,"next":{"title":"示例一","level":"4.2","depth":1,"path":"example/simple.md","ref":"example/simple.md","articles":[]},"previous":{"title":"基于白盒数据测试数据快照","level":"3.3","depth":1,"path":"main-concepts/test-by-mock.md","ref":"main-concepts/test-by-mock.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"example/preface.md","mtime":"2019-07-23T12:08:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-24T07:09:46.229Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"交互函数","level":"6.3","depth":1,"next":{"title":"常见问题","level":"8.1","depth":1,"path":"faq/common.md","ref":"faq/common.md","articles":[]},"previous":{"title":"前端爬虫工具 web-crawl-util","level":"6.2","depth":1,"path":"api/web-crawl-util.md","ref":"api/web-crawl-util.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/Interaction.md","mtime":"2019-07-24T07:09:33.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-24T07:09:46.229Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
