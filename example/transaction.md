@@ -36,5 +36,33 @@ Load config file: /Users/hebly723/git/matman-demo/DevOpts/mockstar-app/mockstar.
        http://10.64.66.73:9527
 ```
 
+## 代理设置
+
+mockstar提供了桩数据，但是需要将页面的请求地址代理到mockstar的端口才可以正常使用，所以需要一款代理应用。
+
+这边推荐使用whistle，安装和使用请参考[whistle中文文档](https://github.com/avwo/whistle/blob/HEAD/README-zh_CN.md)
+
+运行如下命令打开whistle
+
+```bash
+w2 restart -p 8080
+```
+
 打开 http://127.0.0.1:9527 ，可以看到如下界面
+
+![mockstar主界面](../images/example/mockstar_index.png)
+
+点击选项卡中的`更多`，进入数据模拟页
+
+界面上有显示建议的whistle代理设置，`/(.*)/cgi-bin/a/b/get_flow(.*)/ 127.0.0.1:9527`
+
+直接复制黏贴进whistle的设置中，如下
+
+![whistle代理设置](../images/example/whistle_cmd.png)
+
+Ctrl+s 保存，但如果要在浏览器中查看的话，还需要安装switchOmega，具体操作参照[switchOmega](../third-party/switchOmega.md)
+
+设置浏览器使用给定的代理之后，就可以看见如下界面：
+
+![明细界面](../images/example/transaction.png)
 

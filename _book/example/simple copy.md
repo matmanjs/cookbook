@@ -1,89 +1,27 @@
 # 示例一
 
-本文介绍如何对一个简单静态页面书写自动化测试代码。
-
-## 示例项目
-
-如果读者已经将示例项目下载下来，并使用`npm start`在本地运行起整个项目了的话，可以在http://localhost:3000/simple下 查看示例项目的界面，如下图
+> 如果读者已经将示例项目下载下来，并使用 `npm start` 在本地运行起整个项目了的话，可以在http://localhost:3000/simple下 查看示例项目的界面，如下图
 
 ![主界面](../images/example/mainframe.png)
 
-接下来我们针对这个项目书写其测试代码。
+示例一的业务代码在 [src/pages/simple](https://github.com/matmanjs/matman-demo/tree/master/src/pages/simple) 下
 
-## 安装全局依赖
+测试。。。
 
-该部分参见[安装和升级](../installation/install.md)
+## 参数设置
 
-## 建立项目
-
-在测试目录下，运行如下命令：
-
-```bash
-matman init project
-```
-
-按照提示操作即可，命令运行完之后会在当前目录下生成一个默认名字为matman-app的测试文件夹
-
-进入该目录，运行如下命令。
-
-```bash
-matman init tester
-```
-
-可以看到如下输出：
-
-```bash
-? 请选择 tester 放置的根目录 (Use arrow keys)
-❯ /Users/hebly723/git/cookbook_demo/matman-app/src/testers 
-```
-
-可以选择自定义的目录，但是建议按默认的即可，直接回车。
-
-```bash
-? 请输入需要测试的页面，例如： http://domain.com/index.html 
-```
-
-这里输入要测试的页面的链接，示例项目的链接是 `http://localhost:3000/simple` ，因此我们可以在这里输入这个
-
-
-同理，接下来按提示操作即可。
-
-应如下这般
-
-```bash
-
-欢迎使用 Matman 脚手架来创建 tester
-
-? 请选择 tester 放置的根目录 /Users/hebly723/git/cookbook_demo/matman-app/src/testers
-? 请输入需要测试的页面，例如： http://domain.com/index.html http://localhost:3000/simple
-? 请输入开始爬虫的标志dom，例如： #root .App #root
-? 请输入tester名称，只能够输入英文、数字和、- 及 _  page-simple
-   create crawlers/get-page-info.js
-   create env/index.js
-   create cases/basic-check/index.js
-   create cases/basic-check/index.test.js
-mockstar INFO  项目初始化完成
-mockstar INFO  本次初始化过程结束。
-```
-
-然后我们可以进入对应的的 `tester` 目录
-
-可以看到 `tester` 下有两个文件夹， `demo_tester` 和 `page-simple` ，`demo_tester` 是创建项目时附带的示例代码， `page-simple` 是我们刚刚创建的测试文件。
-
-![项目结构](../images/example/project_tree.png)
-
-## 设置运行时参数
-
- `cases` 文件夹存储的是测试文件夹，一个测试文件夹中通常包含两个文件： `index.js` 和 `index.test.js` 。
+DevOpts/matman-app/src/testers/page-simple下的cases文件夹存储的是测试文件夹，一个测试文件夹中通常包含两个文件：index.js和index.test.js。
 
 其中：
 
--  `index.js` 中包含对测试过程的设置，比如测试页面的大小，测试时数据的 `mock` ，测试过程中的模拟操作等。
--  `index.test.js` 中包含对各个阶段测试数据的比较和测试。
+- index.js中包含对测试过程的设置，比如测试页面的大小，测试时数据的mock，测试过程中的模拟操作等。
+- index.test.js中包含对各个阶段测试数据的比较和测试。
 
 对测试思想还希望有深入了解的可以参考 [数据快照](../main-concepts/data-snapshot.md)
 
-关注 `page-simple` 下的 `cases` 文件夹中 `basic-check` 里的 `index.js` 文件，可以看到如下代码
+可以看到page-simple下的cases文件夹有两个测试文件夹，我们先关注jQuery-check中的测试代码。
+
+查看index.js，可以看到如下代码
 
 ```js
 const env = require('../../env');
@@ -93,51 +31,42 @@ function getResult(opts) {
     const caseParser = env.getCaseParser(__dirname);
 
     // 2. 获取页面的 url
-    let pageUrl = env.getPageUrl(true);
+    const pageUrl = env.getPageUrl(true);
 
     // 3. 获取 crawlerScript 爬虫脚本路径
-    let crawlerScriptPath = caseParser.getCrawlerScriptPath('../../crawlers/get-page-info');
+    const crawlerScriptPath = caseParser.getCrawlerScriptPath('../../crawlers/get-page-info-jquery');
 
     // 4. 获得一些配置参数
-    opts = Object.assign({
-        proxyServer: env.getProxyServer(true),
+    const reqOpts = Object.assign({
+        proxyServer: env.getProxyServer(false),
         wait: env.OPTS.WAIT,
         screenshot: true
     }, opts);
 
-    // console.log('-pageUrl-', pageUrl);
-    // console.log('-crawlerScriptPath-', crawlerScriptPath);
-    // console.log('-opts-', opts);
+    // console.log(reqOpts);
 
+    // TODO 应该在 useRecorder 为 true 时支持延时关闭，否则可能会造成来不及收集到数据上报信息
     // 5. 执行并返回 Promise 结果
-    return caseParser.handleScan(pageUrl, crawlerScriptPath, opts);
+    return caseParser.handleScan(pageUrl, crawlerScriptPath, reqOpts);
 }
 
 module.exports = getResult;
-
-// getResult({ show: true, doNotEnd: false, useRecorder: false })
-//     .then(function (result) {
-//         console.log(JSON.stringify(result));
-//     })
-//     .catch(function (error) {
-//         console.error('failed:', error);
-//     });
 ```
 
 - `caseParse` 是用来指定测试代码所在位置的方法，默认指定的是当前文件夹。
 
-- `pageUrl` 即为要测试的页面的地址，可以进入对应的 `env` 文件夹下的 `index.js` 中修改为本用例对应的页面地址，即 `http://localhost:3000/simple`
+- `pageUrl` 即为要测试的页面的地址，可以进入对应的env文件夹下的index.js中修改为本用例对应的页面地址，即 `http://localhost:3000/simple`
 
-- `crawlerScriptPath` 对应的是爬虫脚本，即通常名为`get-page-info`的文件，在`getCrawlerScriptPath()`中传对应文件的相对路径来引用
+- `crawlerScriptPath` 对应的是爬虫脚本，即通常名为get-page-info的文件，在getCrawlerScriptPath()中传对应文件的相对路径来引用
 
-- `reqOpts`中存储一些运行时的信息，包括是否在测试过程中代理服务器，等待时间，是否截屏等等。其中
-    - `proxyServer`用来判断是否要使用代理，在`env.getProxyServer()`方法中传`true`时，`matman`运行时会使用`8080`端口作为自己的代理端口；设置为`false`时，`matman`运行时直接走现网不使用任何代理。如果想使用其余的端口可以在lib/utils.js下的`getProxyServer`方法中再行设置。本例中，因为我们没有设置代理服务器，因此在 `env.getProxyServer()` 中应该传 `false` 
-    - `wait`用来判定何时认为页面已经加载完。`OPTS.WAIT`对应的值有两种形式。可以直接接数字代表加载时间（单位为秒）；也可以接上代码中所示的选择器，监听到该选择器对应的元素存在即代表页面加载完成，可以在对应的文件下进行修改。
-    - `screenshot`用来设置是否要在用例执行过程中进行截图，设置为`true`则用例运行的每一步都会有对应的截图；设置为`false`则不会有截图。
+- reqOpts中存储一些运行时的信息，包括是否在测试过程中代理服务器，等待时间，是否截屏等等。其中
+    - proxyServer用来判断是否要使用代理，在env.getProxyServer()方法中传true时，matman运行时会使用8080端口作为自己的代理端口；设置为false时，matman运行时直接走现网不使用任何代理。如果想使用其余的端口可以在DevOpts/matman-app/src/lib/utils.js下的getProxyServer方法中再行设置；
+    - wait用来判定何时认为页面已经加载完。OPTS.WAIT对应的值有两种形式。可以直接接数字代表加载时间（单位为秒）；也可以接上代码中所示的选择器，监听到该选择器对应的元素存在即代表页面加载完成，可以在对应的文件下进行修改。
+    - screenshot用来设置是否要在用例执行过程中进行截图，设置为true则用例运行的每一步都会有对应的截图；设置为false则不会有截图。
 
- `reqOpts` 的参数和对应的意义可以参考 [matman文档](https://www.npmjs.com/package/matman#213-handleoperatepageurl-crawlerscriptpath-opts---callaction)
+reqOpts的参数和对应的意义可以参考 [matman文档](https://www.npmjs.com/package/matman#213-handleoperatepageurl-crawlerscriptpath-opts---callaction)
 
-设置好了运行时参数之后，可以开始书写爬虫脚本了。
+最后将这些信息作为参数传递给用例，作为用例的运行时参数
 
 ## 爬虫脚本
 
@@ -152,13 +81,13 @@ matman测试的思路可以这么简化理解：按照用例运行操作，记�
 - 中下部的两个按钮，其中的关键信息是按钮的样式
 - 最下方的友情提示，其中的关键信息是友情提示的文案和友情提示是否正常单行展示
 
-预期能够提取出如下信息：
+预期效果如下：
 
 ![爬虫脚本预期效果](../images/example/predict.png)
 
 对于页面有个大致的模块划分之后，接下来就可以开始写爬虫脚本了。
 
-
+对比上面的index.js，可以看到里面是指定相对路径为../../crawlers/get-page-info-jquery的文件作为爬虫脚本的，里面有示例的代码。
 
 ### 顶部图片
 
@@ -416,6 +345,12 @@ module.exports = () => {
 
 这样一个爬虫脚本文件就完成了，接来下就需要在测试文件中获取这些信息进行比对了
 
+## 调试
+
+npm run build
+
+node index.js
+
 ## 测试文件
 
 测试文件在index.js同级目录下，常以index.test.js的文件名出现
@@ -640,4 +575,40 @@ describe('simple.html：常规检查-普通静态页面', function () {
 });
 ```
 
-这样子我们就完成了所有的测试代码，执行代码的方式参见 [启动和运行](./start.md)
+这样子我们就完成了所有的测试代码
+
+## 执行
+
+控制台/终端切到matman-app目录下，运行如下命令：
+
+```bash
+npm run build
+```
+
+可以看到爬虫脚本都已编译完成
+
+再运行如下脚本
+
+```bash
+npm test
+```
+
+看到如下输出，说明测试全部通过
+
+```bash
+
+> matman-app@1.0.0 test /Users/hebly723/git/matman-demo/DevOpts/matman-app
+> mocha src/testers/**/*.test.js
+
+
+
+  simple.html：常规检查-普通静态页面
+    检查基本信息
+      ✓ 顶层图片检查通过
+      ✓ 规则文案检查通过
+      ✓ 按钮样式检查通过
+      ✓ 文字单行检查通过
+
+
+  4 passing (8s)
+```
