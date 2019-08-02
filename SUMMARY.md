@@ -23,11 +23,15 @@
 * [前言](example/preface.md)
 * [启动和运行](example/start.md)
 * [示例一](example/simple.md)
-* [示例二](example/transaction.md)
+* [示例二]
+  * [环境准备](example/environment.md)
+  * [测试配置](example/test-setting.md)
+  * [爬虫](example/crawler.md)
+  * [测试](example/test.md)
 
 ## 进阶
 
-## API 
+## API
 
 * [matman.config.js 配置](api/matman-config.md)
 * [前端爬虫工具 web-crawl-util](api/web-crawl-util.md)
