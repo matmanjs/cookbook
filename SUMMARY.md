@@ -23,7 +23,7 @@
 * [前言](example/preface.md)
 * [启动和运行](example/start.md)
 * [示例一](example/simple.md)
-* [示例二]
+* 示例二
   * [环境准备](example/environment.md)
   * [测试配置](example/test-setting.md)
   * [爬虫](example/crawler.md)
