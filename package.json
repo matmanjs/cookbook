@@ -1,11 +1,7 @@
 {
   "name": "cookbook",
   "version": "1.0.0",
-  "description": "> Github(欢迎+Star): https://github.com/matmanjs/matman",
-  "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
+  "description": "matman 的文档指导",
   "scripts": {
     "start": "gitbook serve"
   },
@@ -13,8 +9,6 @@
     "type": "git",
     "url": "git+https://github.com/matmanjs/cookbook.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/matmanjs/cookbook/issues"
   },
