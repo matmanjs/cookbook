@@ -19,7 +19,7 @@ v4.4.0
 
 ## 2. 安装 matman-cli
 
-[matman-cli](https://www.npmjs.com/package/matman-cli) 提供了一些命令行，用于初始化项目和启动 mock server 服务等。
+[matman-cli](https://www.npmjs.com/package/matman-cli) 提供了一些命令行，用于初始化项目和构建等。
 
 Node 安装成功后，执行如下 npm 命令安装 matman-cli （Mac或Linux的非root用户需要在命令行前面加 `sudo`，如：`sudo npm install -g matman-cli`）。
 
@@ -38,6 +38,12 @@ $ cnpm install -g matman-cli
 
 ```
 $ npm install -g matman-cli --registry=https://registry.npm.taobao.org
+```
+
+全局安装 matman-cli 时，可能会出现以下错误。错误是由 electron 安装时造成的，详见 https://github.com/matmanjs/matman-cli/issues/30 。此时需要增加一些额外参数来安装：
+
+```
+$ npm install matman-cli -g --unsafe-perm=true --allow-root
 ```
 
 matman-cli 安装完成后，执行命令 `matman --help`，查看帮助信息:
