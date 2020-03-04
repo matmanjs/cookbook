@@ -1,4 +1,4 @@
-# Table of contents
+# Summary
 
 * [关于 Matman](README.md)
 * [安装和升级](installation/install.md)
@@ -7,9 +7,9 @@
 
 ## 主要概念
 
-* [页面快照](main-concepts/page-snapshot.md)
-* [数据快照](main-concepts/data-snapshot.md)
-* [基于白盒数据测试数据快照](main-concepts/test-by-mock.md)
+- [页面快照](main-concepts/page-snapshot.md)
+- [数据快照](main-concepts/data-snapshot.md)
+- [基于白盒数据测试数据快照](main-concepts/test-by-mock.md)
 
 ## 第三方工具介绍
 
