@@ -1,11 +1,9 @@
 # Table of contents
 
 * [关于 Matman](README.md)
-
-## 安装
-
 * [安装和升级](installation/install.md)
-* [快速上手](installation/getting-started.md)
+* 快速入门
+  * [第一个端对端测试](getting-started/baidu-01.md)
 
 ## 主要概念
 
